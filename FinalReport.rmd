@@ -97,3 +97,5 @@ So there is a big difference in the p value. Those who took the drug in which 25
 # Discussion and Conclusion
 
 <!--Discussion and conclusion here.  If you found a relationship be sure to consider whether the relationship occurs because one of the variavbles causes the other, or whether they perhasps are related for some other reason.  Watch the chapter 6 videos from the GeorgeTown videos collection.!-->
+today we looked at results of a drug trying to prevent a decease with a placebo effect in place. 
+We Also used chat gpt to help out with our data finding but up to a point was a loss but with a help tab in posit.cloud we were able to continue. we concluded that those who took the drug were less likely to get infected than those who took the placebo.

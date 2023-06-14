@@ -11,6 +11,15 @@ require(tigerstats)
 triUmp <-read.csv(file="triUmpsal.csv",header=TRUE)
 ```
 
+```{r}
+Charlie <- filter(triUmp, DrugUser== "yes")
+```
+
+```{r eval=FALSE}
+Charlie <- Charlie %>%
+mutate(across(where(is.character), as.factor))
+```
+
 # Introduction
 
 <!--In this section you explain what you are trying to show.  Where did the data come from?  What is the research or other question you are trying to answer?.  If you skimp in this section expect to be marked down in your grade. Paint a picture of the project a couple of paragraphs is expected!-->
@@ -31,9 +40,50 @@ A new  preventative aides drug (triUmpsal) is under test in clinical trials. Con
 
 <!--Graphical results here.  Make sure to show your code.  Provide appropriate labels for axes, giving units if possible, and provide a good title for the graph, too.  Use the graphical results to describe the patterns if any that exist in the data as focused toward the research question. Bottom line is to explain the features of the graph that are relevant to conforming or departing to what is expected by your null hypothesis !-->
 
+
+```{r}
+barchartGC(~infected + treatment,data=Charlie)
+barchartGC(~infected + treatment,data=Charlie, type="percent")
+
+```
+the two graphs show who got the disease 
+
+
+
+
+
+```{r}
+library(ggplot2)
+
+# Assuming "infected" and "treatment" are column names in the data frame "Charlie"
+
+# Bar chart for "infected" variable
+ggplot(Charlie, aes(x = infected, fill = treatment)) +
+  geom_bar(position = "dodge", color = "black") +
+  labs(x = "Infected", y = "Count") +
+  ggtitle("Bar Chart of Infected and Treatment") +
+  scale_fill_manual(values = c("drug" = "blue", "placebo" = "red")) +
+  theme(legend.position = "bottom")
+
+# Bar chart for "treatment" variable
+ggplot(Charlie, aes(x = treatment, fill = treatment)) +
+  geom_bar(position = "dodge", color = "black") +
+  labs(x = "Treatment", y = "Count") +
+  ggtitle("Bar Chart of Treatment") +
+  scale_fill_manual(values = c("drug" = "blue", "placebo" = "red")) +
+  theme(legend.position = "bottom")
+```
+
 ### Numerical Descriptive Results
 
 <!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
+
+```{r}
+table2 <- xtabs(~infected + treatment, data=Charlie)
+rowPerc(table2)
+colPerc(table2)
+```
+Those who got aid where at 25% whith the drug taken. Meanwhile 75% took the placebo. Overall those who took the drug or the placebo didnt get infected.
 
 ## Inferential Results
 
